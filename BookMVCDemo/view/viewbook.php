@@ -1,0 +1,1 @@
+You selected book with title: <?php echo $book->title; ?>
