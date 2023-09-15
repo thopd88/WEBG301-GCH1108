@@ -18,3 +18,20 @@ php artisan migration
 ```
 php artisan serve
 ```
+-------------------------------------------------
+-- To run code from Github
+- Update Vendor libraries
+```
+composer update
+```
+- Copy .env.example to .env
+- Config DB_DATABASE,DB_USERNAME,DB_PASSWORD to your localhost
+- Run migration
+```
+php artisan migrate
+```
+- Generate App Key
+```
+php artisan key:generate
+```
+- Your app can run now
