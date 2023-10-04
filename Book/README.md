@@ -12,7 +12,7 @@ php artisan make:controller BookController
 ```
 - Run migration to create database tables (after code the migration)
 ```
-php artisan migration
+php artisan migrate
 ```
 - Run server
 ```
