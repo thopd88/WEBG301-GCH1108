@@ -1,4 +1,3 @@
-{{-- Show a simple table with all books --}}
 <!doctype html>
 <html lang="en">
 
@@ -19,30 +18,25 @@
     <!-- place navbar here -->
   </header>
   <main>
-    <div class="table-responsive">
-        <table class="table table-primary">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Description</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($books as $book)
-                    <tr>
-                        <td>
-                            <a href="/books/{{$book->id}}">{{$book->title}}</a>
-                        </td>
-                        <td>{{ $book->author }}</td>
-                        <td>{{ $book->description }}</td>
-                        <td><a href="/books/{{$book->id}}/edit">Edit</a></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <form action="/books/{{$book->id}}" method="post">
+        @csrf
+        @method('PUT')
+        <div class="mb-3">
+          <label for="" class="form-label">Title</label>
+          <input type="text"
+            class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="" value="{{$book->title}}">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Author</label>
+          <input type="text"
+            class="form-control" name="author" id="author" aria-describedby="helpId" placeholder="" value="{{$book->author}}">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Description</label>
+          <textarea class="form-control" name="description" id="description" rows="3">{{$book->author}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </main>
   <footer>
     <!-- place footer here -->
