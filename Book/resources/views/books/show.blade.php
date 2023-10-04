@@ -1,4 +1,3 @@
-{{-- Show a simple table with all books --}}
 <!doctype html>
 <html lang="en">
 
@@ -19,27 +18,12 @@
     <!-- place navbar here -->
   </header>
   <main>
-    <div class="table-responsive">
-        <table class="table table-primary">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($books as $book)
-                    <tr>
-                        <td>
-                            <a href="/books/{{$book->id}}">{{$book->title}}</a>
-                        </td>
-                        <td>{{ $book->author }}</td>
-                        <td>{{ $book->description }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{$book->title}}</h4>
+            <h5 class="card-title">{{$book->author}}</h5>
+            <p class="card-text">{{$book->description}}</p>
+        </div>
     </div>
   </main>
   <footer>
