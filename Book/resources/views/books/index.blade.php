@@ -26,6 +26,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Description</th>
+                    <th>Category</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                         </td>
                         <td>{{ $book->author }}</td>
                         <td>{{ $book->description }}</td>
+                        <td>{{ $book->category->name }}</td>
                         <td>
                             <a href="/books/{{$book->id}}/edit">
                                 <button type="button" class="btn btn-primary">Edit</button>
