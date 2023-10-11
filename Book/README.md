@@ -35,3 +35,11 @@ php artisan migrate
 php artisan key:generate
 ```
 - Your app can run now
+
+
+----------------------------
+- Many to Many relationship
+```
+php artisan make:model Tag -mr
+php artisan make:migration create_book_tag_table
+```

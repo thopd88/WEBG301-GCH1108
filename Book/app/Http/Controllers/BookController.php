@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -23,7 +24,8 @@ class BookController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('books.create', compact('categories'));
+        $tags = Tag::all();
+        return view('books.create', compact('categories', 'tags'));
     }
 
     /**
@@ -31,7 +33,8 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::create($request->all());
+        $book = Book::create($request->all());
+        $book->tags()->attach($request->tags);
         return redirect()->route('books.index');
     }
 
@@ -50,7 +53,9 @@ class BookController extends Controller
     public function edit(string $id)
     {
         $book = Book::find($id);
-        return view('books.edit', compact('book'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('books.edit', compact('book', 'categories', 'tags'));
     }
 
     /**
@@ -60,6 +65,7 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $book->update($request->all());
+        $book->tags()->sync($request->tags);
         return redirect()->route('books.index');
     }
 
@@ -71,5 +77,14 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->delete();
         return redirect()->route('books.index');
+    }
+
+    /**
+     * Search books by title.
+     */
+    public function search(Request $request)
+    {
+        $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
+        return view('books.index', compact('books'));
     }
 }
