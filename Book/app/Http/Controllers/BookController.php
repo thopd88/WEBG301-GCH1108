@@ -34,6 +34,13 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $book = Book::create($request->all());
+        // Save image
+        if ($request->hasFile('image')) {
+            $book->image = $request->image->store('images', 'public');
+            $book->save();
+        }
+
+
         $book->tags()->attach($request->tags);
         return redirect()->route('books.index');
     }

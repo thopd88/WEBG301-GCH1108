@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Books Create')
 @section('content')
-<form action="/books" method="post">
+<form action="/books" method="post" enctype="multipart/form-data">
   @csrf
   <div class="mb-3">
     <label for="" class="form-label">Title</label>
@@ -28,6 +28,11 @@
         <option value="{{ $tag->id }}">{{ $tag->name }}</option>
       @endforeach
     </select>
+  </div>
+  {{-- Input image --}}
+  <div class="mb-3">
+    <label for="image" class="form-label">Image</label>
+    <input class="form-control" type="file" name="image" id="image">
   </div>
   <div class="mb-3">
     <label for="" class="form-label">Description</label>
