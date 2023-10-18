@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,22 @@ Route::resource('books', BookController::class);
 
 // Route for searching books
 Route::post('/search', [BookController::class, 'search'])->name('search');
+
+// Route for show success 
+Route::get('/success', function () {
+    if (!auth()->check()) {
+        return redirect()->route('login');
+    }
+    return view('success');
+})->name('success');
+
+// Route for login
+Route::get('/login', [AuthenticateController::class, 'login'])->name('login');
+Route::post('/login', [AuthenticateController::class, 'doLogin'])->name('login');
+
+// Route for register
+Route::get('/register', [AuthenticateController::class, 'register'])->name('register');
+Route::post('/register', [AuthenticateController::class, 'doRegister'])->name('register');
+
+// Route for logout
+Route::get('/logout', [AuthenticateController::class, 'logout'])->name('logout');
